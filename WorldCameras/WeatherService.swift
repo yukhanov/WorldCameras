@@ -22,7 +22,8 @@ class WeatherService {
                 print(Thread.current)
                 let weatherJSON: JSON = JSON(response.result.value!)
                 print(weatherJSON)
-                let temp: String = weatherJSON["main"]["temp"].stringValue
+                let temp: Int = weatherJSON["main"]["temp"].intValue
+                //temp.dropLast(2)
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send"), object: temp)
                 

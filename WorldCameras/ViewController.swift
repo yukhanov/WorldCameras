@@ -20,18 +20,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
-        
-//        getWeatherData(url: weatherUrl, parameters: params)
+
+
     }
-    /*
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if segue.identifier == "toWeatherViewController", let cell = sender as? UITableViewCell {
-     let ctrl = segue.destination as! WeatherViewController
-     if let indexPath = tableView.indexPath(for: cell) {
-     ctrl.cityName = cityes![indexPath.row].name
-     }
-     }
- */
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC", let cell = sender as? UITableViewCell {

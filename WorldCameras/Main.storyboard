@@ -94,7 +94,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текущее время:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpr-9N-2Fl">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Местное время:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpr-9N-2Fl">
                                                     <rect key="frame" x="20" y="0.0" width="129" height="49.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -154,17 +154,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Показать на карте" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2no-kA-sDu">
-                                                    <rect key="frame" x="20" y="0.0" width="147" height="43.5"/>
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i0j-mj-Wca">
+                                                    <rect key="frame" x="20" y="6" width="321" height="30"/>
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                    <state key="normal" title="Показать на карте"/>
+                                                    <connections>
+                                                        <segue destination="8St-Nb-mgw" kind="show" identifier="goToMapVC" id="6Ra-ht-ajm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="2no-kA-sDu" firstAttribute="top" secondItem="Phh-yV-aCt" secondAttribute="top" id="Km1-NK-p7X"/>
-                                                <constraint firstAttribute="bottom" secondItem="2no-kA-sDu" secondAttribute="bottom" id="Ott-dR-dVx"/>
-                                                <constraint firstItem="2no-kA-sDu" firstAttribute="leading" secondItem="Phh-yV-aCt" secondAttribute="leading" constant="20" id="bBG-f0-BPq"/>
+                                                <constraint firstAttribute="bottom" secondItem="i0j-mj-Wca" secondAttribute="bottom" constant="7.5" id="L5f-eK-912"/>
+                                                <constraint firstItem="i0j-mj-Wca" firstAttribute="leading" secondItem="Phh-yV-aCt" secondAttribute="leading" constant="20" id="Vew-DW-Qkv"/>
+                                                <constraint firstAttribute="trailing" secondItem="i0j-mj-Wca" secondAttribute="trailing" id="XHP-ph-irV"/>
+                                                <constraint firstItem="i0j-mj-Wca" firstAttribute="top" secondItem="Phh-yV-aCt" secondAttribute="top" constant="6" id="zaV-zE-DwS"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -204,7 +207,36 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F5V-H6-spo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1773.5999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1877.5999999999999" y="133.5832083958021"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="vvE-gt-qgj">
+            <objects>
+                <viewController id="8St-Nb-mgw" customClass="MapViewController" customModule="WorldCameras" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ywQ-Um-mJX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LlV-xZ-XG4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LlV-xZ-XG4" firstAttribute="top" secondItem="ywQ-Um-mJX" secondAttribute="top" id="HIh-E0-rbU"/>
+                            <constraint firstItem="LlV-xZ-XG4" firstAttribute="trailing" secondItem="nNk-VU-454" secondAttribute="trailing" id="Ld9-wa-mGL"/>
+                            <constraint firstItem="LlV-xZ-XG4" firstAttribute="bottom" secondItem="nNk-VU-454" secondAttribute="bottom" id="X25-9P-epi"/>
+                            <constraint firstItem="LlV-xZ-XG4" firstAttribute="leading" secondItem="nNk-VU-454" secondAttribute="leading" id="deo-K3-ynP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nNk-VU-454"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="LlV-xZ-XG4" id="odG-V0-EC9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8dm-gy-PHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2657" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="A5r-Nc-2OE">

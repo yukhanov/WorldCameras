@@ -31,9 +31,9 @@ class DetailViewController: UITableViewController {
     
     @objc func send_object2(_ status: Notification) {
         //        print(progress.progress)
-        var list: String = status.object as! String
+        let list: Int = status.object as! Int
         DispatchQueue.main.async {
-            self.weatherLabel.text = list
+            self.weatherLabel.text = String(list)
         }
         
         
@@ -41,6 +41,7 @@ class DetailViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        navigationItem.title = currentCity
         let videoURL = URL(string: "https://media-01.obit.ru/peterhof/index.m3u8")
         let player = AVPlayer(url: videoURL!)
         let playerLayer = AVPlayerLayer(player: player)
@@ -49,10 +50,22 @@ class DetailViewController: UITableViewController {
         player.play()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToMapVC" {
+            let mapVC: MapViewController = segue.destination as! MapViewController
+//            if let indexPath = tableView.indexPath(for: cell) {
+                mapVC.city = currentCity
+//            }
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightList[indexPath.row]
     }
   
+
+
     
 
 }
