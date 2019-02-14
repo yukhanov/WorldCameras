@@ -12,20 +12,29 @@ import SwiftyJSON
 
 class WeatherService {
     
+    static var weatherList: [WeatherData] = [] {
     
-    func getWeatherData(city: String) {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send"), object: nil)
+        }
+    }
+    
+    
+    static func getWeatherData(city: String) {
         let weatherUrl = "https://api.openweathermap.org/data/2.5/weather"
         let params: Parameters = ["q": city, "appid": "02a082f1be3fb9bbf041f849ca8ad290", "units": "metric"]
         
         request(weatherUrl, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { (response) in
             if response.result.isSuccess {
-                print(Thread.current)
                 let weatherJSON: JSON = JSON(response.result.value!)
-                print(weatherJSON)
-                let temp: Int = weatherJSON["main"]["temp"].intValue
-                //temp.dropLast(2)
+//                print(weatherJSON)
+//                let temp: Int = weatherJSON["main"]["temp"].intValue
+                //print(weatherJSON)
+                let weatherData: WeatherData = WeatherData(json: weatherJSON)
                 
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send"), object: temp)
+                WeatherService.weatherList.append(weatherData)
+                
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "send"), object: weatherData.temp)
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
@@ -34,5 +43,18 @@ class WeatherService {
         
         
     }
+    
+    static func getWeatherFromName(city: String) -> WeatherData? {
+        for value in WeatherService.weatherList {
+            if value.name == city {
+        
+                return value
+                
+            }
+        }
+        return nil
+    }
+    
+
 
 }

@@ -12,14 +12,22 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     var city: String = ""
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let lon: Double = Double(WeatherService.getWeatherFromName(city: city)!.longitude)!
+        let lat: Double = Double(WeatherService.getWeatherFromName(city: city)!.latitude)!
+        
+        
 
         mapView.delegate = self
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(city) { (placemarks, error) in
+        let location = CLLocation(latitude: lat, longitude: lon)
+        geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             guard error == nil else { return }
             guard let placemarks = placemarks else { return }
             

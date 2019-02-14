@@ -10,13 +10,17 @@ import Foundation
 import SwiftyJSON
 
 class WeatherData {
-    var temp: String = ""
-    var name: String = ""
+    var temp: Int
+    var name: String
+    var latitude: String
+    var longitude: String
+
     
-    
-    init(json: JSON, city: String) {
-        self.temp = json["main"]["temp"].stringValue
+    init(json: JSON) {
+        self.temp = json["main"]["temp"].intValue
         self.name = json["name"].stringValue
+        self.latitude = json["coord"]["lat"].stringValue
+        self.longitude = json["coord"]["lon"].stringValue
     }
     
     

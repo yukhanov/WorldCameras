@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+//let weatherData = WeatherService()
 
 class DetailViewController: UITableViewController {
 
@@ -22,8 +23,8 @@ class DetailViewController: UITableViewController {
         
         heightList = [tableView.frame.height * 0.25, 50, 50, 50, 50]
         
-        let weatherData = WeatherService()
-        weatherData.getWeatherData(city: currentCity)
+        
+        WeatherService.getWeatherData(city: currentCity)
         
         NotificationCenter.default.addObserver(self, selector: #selector(send_object2), name: NSNotification.Name(rawValue: "send"), object: nil)
 
@@ -31,9 +32,10 @@ class DetailViewController: UITableViewController {
     
     @objc func send_object2(_ status: Notification) {
         //        print(progress.progress)
-        let list: Int = status.object as! Int
+        //let list: WeatherData = status.object as! WeatherData
         DispatchQueue.main.async {
-            self.weatherLabel.text = String(list)
+            
+            self.weatherLabel.text = String(WeatherService.getWeatherFromName(city: self.currentCity)!.temp)
         }
         
         

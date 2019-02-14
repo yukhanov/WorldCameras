@@ -20,6 +20,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        
+        FoursquareService.getVenuesFromLocation()
+        
+        
+//        let wikiJson = WikipediaService()
+//        wikiJson.getDataFromWiki(search: "Москва")
 
 
     }
