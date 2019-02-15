@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    var city: String = ""
+    var city: String = "" 
     
     
     @IBOutlet weak var mapView: MKMapView!
@@ -42,6 +42,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.mapView.showAnnotations([annotation], animated: true)
             self.mapView.selectAnnotation(annotation, animated: true)
         }
+        
+        DispatchQueue.main.async {
+            FoursquareService.getVenuesFromLocation(location: self.locationDoubleToString(longitude: lon, latitude: lat))
+        }
+        
+        
+    }
+    
+    func locationDoubleToString(longitude: Double, latitude: Double) -> String {
+        
+        let lonStr = String(longitude)
+        let latStr = String(latitude)
+        return (latStr + "," + lonStr)
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

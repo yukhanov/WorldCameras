@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-//let weatherData = WeatherService()
+
 
 class DetailViewController: UITableViewController {
 
